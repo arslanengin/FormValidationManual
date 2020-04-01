@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-size: 180%;
+        }
+
+        input {
+            padding: 15px;
+            font-size: 25px;
+            border-radius: 5px;
+            border: 1px solid grey;
+            width: 250px;
+        }
+
+        label {
+            display: inline-block;
+            width: 170px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: fff;
+            padding: 14px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        #wrapper {
+            width: 700px;
+            margin: 0 auto;
+
+        }
+
+        #error {
+            color: red;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <div id="error"></div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="Your email">
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefon</label>
+            <input type="text" name="phone" id="phone" placeholder="Please enter your email">
+        </div>
+        <div class="form-group">
+            <label for="password">Parola</label>
+            <input type="text" name="password" id="password" placeholder="Please enter your email">
+        </div>
+        <div class="form-group">
+            <label for="repassword">Parola Tekrar</label>
+            <input type="text" name="repassword" id="repassword" placeholder="Please enter your email">
+        </div>
+        <button id="btn" > Kaydet </button>
+    </div>
+    <script>
+        $(function () {
+            
+            function isEmail(email)
+                {
+                    var pattern = /^([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$/;
+                    return pattern.test(email);
+                }
+                
+            $("#btn").click(function () {
+
+                var errormessage = "";
+                $("#error").html("");
+
+                if ($("#email").val() == "") {
+                    errormessage += "<p>Email alanı zorunlu alan</p>";
+                }
+                
+                if(isEmail($("#email").val())==false){
+                    errormessage+="<p>Geçersiz email</p>";
+                }
+                if ($("#phone").val() == "") {
+                    errormessage += "<p>Telefon alanı zorunlu alan</p>";
+                }
+                if ($("#password").val() == "") {
+                    errormessage += "<p>Parola alanı zorunlu alan</p>";
+                }
+                if ($("#repassword").val() != $("#password").val()) {
+                    errormessage += "<p>Parolalar eşleşmiyor</p>";
+                }
+                if (errormessage != "") {
+                    $("#error").html(errormessage);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
